@@ -10,9 +10,7 @@ namespace LogicsSS
     {
         public static void Main()
         {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.BackgroundColor = ConsoleColor.White;
-            //Console.ResetColor(); // сбрасываем в стандартный
+            Console.ForegroundColor = ConsoleColor.Green;
             User user = new User(11f, "Valera Bebris", "160216038307Se");
             user.DebugLog();
 
@@ -80,11 +78,7 @@ namespace LogicsSS
             }
             private void Refill()
             {
-                Console.WriteLine($"Choose wallet:
-Qiwi
-Visa
-WebMoney
-Tinkoff");
+                Console.WriteLine($"Choose wallet:\nQiwi\nVisa\nWebMoney\nTinkoff");
                 string Wallet = Console.ReadLine();
                 Console.WriteLine($"On your account({BankMoney}), to refill:");
                 int Refill = Convert.ToInt32(Console.ReadLine());
@@ -98,10 +92,8 @@ Tinkoff");
                 }
                 else
                 {
-                    Console.WriteLine($"Bank rejected the request (uncorrect value)
-Bank({BankMoney})" +
-                        $"
-Your request({Refill})");
+                    Console.WriteLine($"Bank rejected the request (uncorrect value)\nBank({BankMoney})" +
+                        $"\nYour request({Refill})");
                 }
             }
             Product InsideProduct = new Product();
@@ -133,8 +125,7 @@ Your request({Refill})");
             }
             private void ChangePassword()
             {
-                Console.WriteLine($"Curret Password:{_USER._Password}
-If u wanna change it(Y)(N)");
+                Console.WriteLine($"Curret Password:{_USER._Password}\nIf u wanna change it(Y)(N)");
                 string Change = Console.ReadLine();
                 if (Change == "Y")
                 {
@@ -156,30 +147,20 @@ If u wanna change it(Y)(N)");
                     case "Info":
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine($"__________________________________________________________________
-" +
-                            $"      Hello {_USER._UserName}
-       For refill your balance: Refill
-" +
-                            $"          For Show yout item bin: Bin
-" +
-                            $"          For Check your Balance: Wallet
-" +
-                            $"          For Check all history: Buy History
-" +
-                            $"          For go to Catalog: Catalog
-" +
-                            $"          For check all account info: Account
-" +
-                            $"          For Change Password: Change Password
-" +
-                            $"          For Buy all in Bin: Buy
-" +
-                            $"          For Exit: Exit" +
-                            $"
-__________________________________________________________________");
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine($"__________________________________________________________________\n" +
+                            $"          Hello {_USER._UserName}\n" +
+                            $"      For refill your balance: Refill\n" +
+                            $"      For Show yout item bin: Bin\n" +
+                            $"      For Check your Balance: Wallet\n" +
+                            $"      For Check all history: Buy History\n" +
+                            $"      For go to Catalog: Catalog\n" +
+                            $"      For check all account info: Account\n" +
+                            $"      For Change Password: Change Password\n" +
+                            $"      For Buy all in Bin: Buy\n" +
+                            $"      For Exit: Exit" +
+                            $"\n__________________________________________________________________");
+                        Console.BackgroundColor = default;
+                        Console.ForegroundColor = ConsoleColor.Green;
                         break;
                     case "Wallet":
                         Console.WriteLine($"Your current balance: {_USER._OnCard}");
@@ -208,6 +189,12 @@ __________________________________________________________________");
                         Environment.Exit(0);
                         break;
                 }
+            }
+            public void ConsoleColorOutput(string write)
+            {
+                Console.ForegroundColor = ConsoleColor.Red; 
+                Console.WriteLine(write);
+                Console.ForegroundColor = default;
             }
             private void Cmd(User user, bool IsBreak)
             {
@@ -273,9 +260,7 @@ __________________________________________________________________");
             }
             public void DebugLog()
             {
-                Console.WriteLine($"NAME: { _UserName }
-Balance: { _OnCard }$
-Password: { _Password }");
+                Console.WriteLine($"NAME: { _UserName }\nBalance: { _OnCard }$\nPassword: { _Password }");
             }
             public List<string> Hisory = new List<string>();
             public void History(string AnyMove)
@@ -321,14 +306,10 @@ Password: { _Password }");
                     case "Show Catalog":
                         foreach (Product product in _Products)
                         {
-                            Console.WriteLine($"    
-{product._ProductName}" +
-                                $"
-Cost: {product._ProductCost}" +
-                                $"
-ID: {product._ProductID}" +
-                                $"
-Description: {product._Description}");
+                            Console.WriteLine($"    \n{product._ProductName}" +
+                                $"\nCost: {product._ProductCost}" +
+                                $"\nID: {product._ProductID}" +
+                                $"\nDescription: {product._Description}");
                         }
                         break;
                     case "Add to bin":
@@ -360,7 +341,8 @@ Description: {product._Description}");
                             Console.WriteLine("All items added in BIN");
                             break; 
                         }
-                        Console.WriteLine("Uncorrect Value | Index out of range");
+                        UXs uXs = new UXs();
+                        uXs.ConsoleColorOutput("Uncorrect Value | Index out of range");
                     }   
                 }
             }
